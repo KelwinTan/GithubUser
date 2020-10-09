@@ -46,8 +46,6 @@ class ListUserAdapter(private val listUser: ArrayList<User>) :
                 itemView.setOnClickListener { onItemClickCallback?.onItemClicked(user) }
             }
         }
-
-
     }
 
     interface OnItemClickCallback {

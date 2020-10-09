@@ -9,7 +9,9 @@
         app:showAsAction="collapseActionView|always" />
     <group android:menuCategory="container">
         <item android:id="@+id/menu2"
-            android:title="@string/menu_2" />
+            android:title="@string/favourite_users" />
+        <item android:id="@+id/menu3"
+            android:title="@string/setting" />
     </group>
 
 </menu>
