@@ -1,10 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.navigation:navigation-runtime-ktx:2.3.0@aar">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../submission 2/DicodingUserApp/.gradle/caches/transforms-2/files-2.1/3e3046c4a4a1e5ad658b1f1a6e32c9fb/navigation-runtime-ktx-2.3.0/res" />
-      <root url="file://$PROJECT_DIR$/../../submission 2/DicodingUserApp/.gradle/caches/transforms-2/files-2.1/8454880e7776887d712e3a23632b2a3a/navigation-runtime-ktx-2.3.0/res" />
-      <root url="file://$PROJECT_DIR$/../../submission 2/DicodingUserApp/.gradle/caches/transforms-2/files-2.1/3e3046c4a4a1e5ad658b1f1a6e32c9fb/navigation-runtime-ktx-2.3.0/AndroidManifest.xml" />
       <root url="jar://$PROJECT_DIR$/../../submission 2/DicodingUserApp/.gradle/caches/transforms-2/files-2.1/3e3046c4a4a1e5ad658b1f1a6e32c9fb/navigation-runtime-ktx-2.3.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../submission 2/DicodingUserApp/.gradle/caches/transforms-2/files-2.1/3e3046c4a4a1e5ad658b1f1a6e32c9fb/navigation-runtime-ktx-2.3.0/res" />
+      <root url="file://$PROJECT_DIR$/../../submission 2/DicodingUserApp/.gradle/caches/transforms-2/files-2.1/3e3046c4a4a1e5ad658b1f1a6e32c9fb/navigation-runtime-ktx-2.3.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

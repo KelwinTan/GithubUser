@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dicodinguserapp.db.DatabaseHelper
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import cz.msebera.android.httpclient.Header
@@ -32,6 +33,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var dataFollower: Array<String>
     private lateinit var dataFollowing: Array<String>
 
+    private lateinit var alarmReceiver: AlarmReceiver
+
 
     private var users = arrayListOf<User>()
 
@@ -41,6 +44,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        alarmReceiver = AlarmReceiver()
 
         progressBar.visibility = View.INVISIBLE
         rv_users.setHasFixedSize(true)
@@ -116,7 +121,12 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu2 -> {
-                val i = Intent(this, DetailUserActivity::class.java)
+                val i = Intent(this, FavouriteUserActivity::class.java)
+                startActivity(i)
+                return true
+            }
+            R.id.menu3 -> {
+                val i = Intent(this, SettingActivity::class.java)
                 startActivity(i)
                 return true
             }
@@ -178,7 +188,6 @@ class MainActivity : AppCompatActivity() {
                 responseBody: ByteArray,
                 error: Throwable
             ) {
-                // Jika koneksi gagal
                 progressBar.visibility = View.INVISIBLE
                 val errorMessage = when (statusCode) {
                     401 -> "$statusCode : Bad Request"

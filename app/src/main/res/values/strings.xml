@@ -128,5 +128,13 @@
     <string name="username">Username</string>
     <string name="company">Company</string>
     <string name="location">Location</string>
+    <string name="submit">Submit</string>
+    <string name="delete">Delete</string>
+    <string name="favourite">Favourite</string>
+    <string name="favourite_users">Favourite Users</string>
+    <string name="reminder_setting_preference">Reminder at 9:00 AM</string>
+    <string name="key_reminder_setting_preference">reminder</string>
+    <string name="setting">Setting</string>
+
 
 </resources>

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.test:runner:1.3.0@aar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../submission 2/DicodingUserApp/.gradle/caches/transforms-2/files-2.1/9652fb2203ce558fbb2ea8885975429e/runner-1.3.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../submission 2/DicodingUserApp/.gradle/caches/transforms-2/files-2.1/9652fb2203ce558fbb2ea8885975429e/runner-1.3.0/res" />
+      <root url="file://$PROJECT_DIR$/../../submission 2/DicodingUserApp/.gradle/caches/transforms-2/files-2.1/9652fb2203ce558fbb2ea8885975429e/runner-1.3.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

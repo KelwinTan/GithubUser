@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/DicodingUserApp.iml" filepath="$PROJECT_DIR$/.idea/modules/DicodingUserApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DicodingUserApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DicodingUserApp.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/consumer/DicodingUserApp.consumer.iml" filepath="$PROJECT_DIR$/.idea/modules/consumer/DicodingUserApp.consumer.iml" />
     </modules>
   </component>
 </project>
