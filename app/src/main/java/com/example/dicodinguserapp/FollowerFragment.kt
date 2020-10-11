@@ -2,22 +2,19 @@ package com.example.dicodinguserapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import cz.msebera.android.httpclient.Header
+import kotlinx.android.synthetic.main.fragment_follower.*
 import kotlinx.android.synthetic.main.fragment_follower.view.*
 import org.json.JSONArray
 import org.json.JSONObject
-import java.nio.charset.Charset
-import java.nio.charset.StandardCharsets
 
 /**
  * A simple [Fragment] subclass.
@@ -47,6 +44,13 @@ class FollowerFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         listFollowersAdapter = ListUserAdapter(followersList)
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        progressBar.visibility = View.VISIBLE
+
     }
 
     override fun onCreateView(
@@ -108,6 +112,8 @@ class FollowerFragment : Fragment() {
                         })
                         myFollowerRecyclerView.rv_followers.adapter = listFollowersAdapter
                         listFollowersAdapter.notifyDataSetChanged()
+                        progressBar.visibility = View.INVISIBLE
+
                     }
                 } catch (e: Exception) {
                     Toast.makeText(activity, e.message, Toast.LENGTH_SHORT).show()

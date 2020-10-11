@@ -44,22 +44,6 @@ class FavouriteUserAdapter(private val activity: Activity): RecyclerView.Adapter
         }
     }
 
-    fun addItem(favouriteUser: User){
-        this.listFavouriteUsers.add(favouriteUser)
-        notifyItemInserted(this.listFavouriteUsers.size - 1)
-    }
-
-    fun updateItem(position: Int, favouriteUser: User){
-        this.listFavouriteUsers[position] = favouriteUser
-        notifyItemChanged(position, favouriteUser)
-    }
-
-    fun removeItem(position: Int){
-        this.listFavouriteUsers.removeAt(position)
-        notifyItemRemoved(position)
-        notifyItemRangeChanged(position, this.listFavouriteUsers.size)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteUserViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
         return FavouriteUserViewHolder(view)

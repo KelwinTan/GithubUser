@@ -5,10 +5,7 @@ import android.provider.BaseColumns
 
 internal class UserContract {
 
-
-
     internal class UserColumns : BaseColumns {
-
 
         companion object {
             const val TABLE_NAME = "favourite_user"
@@ -26,7 +23,6 @@ internal class UserContract {
 
             val CONTENT_URI: Uri = Uri.Builder().scheme(SCHEME).authority(AUTHORITY).appendPath(
                 TABLE_NAME).build()
-
 
         }
     }
