@@ -9,20 +9,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_user.view.*
 
-class FavouriteUserAdapter(private val activity: Activity): RecyclerView.Adapter<FavouriteUserAdapter.FavouriteUserViewHolder>()  {
+class FavouriteUserAdapter(private val activity: Activity) :
+    RecyclerView.Adapter<FavouriteUserAdapter.FavouriteUserViewHolder>() {
 
     var listFavouriteUsers = ArrayList<User>()
-    set(listFavouriteUsers){
-        if(listFavouriteUsers.size > 0){
-            this.listFavouriteUsers.clear()
+        set(listFavouriteUsers) {
+            if (listFavouriteUsers.size > 0) {
+                this.listFavouriteUsers.clear()
+            }
+            this.listFavouriteUsers.addAll(listFavouriteUsers)
+            notifyDataSetChanged()
         }
-        this.listFavouriteUsers.addAll(listFavouriteUsers)
-        notifyDataSetChanged()
-    }
 
     inner class FavouriteUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(favouriteUser: User){
-            with(itemView){
+        fun bind(favouriteUser: User) {
+            with(itemView) {
                 Glide.with(itemView.context).load(favouriteUser.avatar).into(img_avatar)
                 txt_username.text = favouriteUser.username
                 txt_follower.text = "Followers: " + favouriteUser.follower
@@ -42,22 +43,6 @@ class FavouriteUserAdapter(private val activity: Activity): RecyclerView.Adapter
                 )
             }
         }
-    }
-
-    fun addItem(favouriteUser: User){
-        this.listFavouriteUsers.add(favouriteUser)
-        notifyItemInserted(this.listFavouriteUsers.size - 1)
-    }
-
-    fun updateItem(position: Int, favouriteUser: User){
-        this.listFavouriteUsers[position] = favouriteUser
-        notifyItemChanged(position, favouriteUser)
-    }
-
-    fun removeItem(position: Int){
-        this.listFavouriteUsers.removeAt(position)
-        notifyItemRemoved(position)
-        notifyItemRangeChanged(position, this.listFavouriteUsers.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteUserViewHolder {

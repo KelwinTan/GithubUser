@@ -6,8 +6,9 @@ import android.content.Context
 import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
-import android.util.Log
-import com.example.dicodinguserapp.db.UserContract
+import com.example.dicodinguserapp.db.UserContract.UserColumns.Companion.AUTHORITY
+import com.example.dicodinguserapp.db.UserContract.UserColumns.Companion.CONTENT_URI
+import com.example.dicodinguserapp.db.UserContract.UserColumns.Companion.TABLE_NAME
 import com.example.dicodinguserapp.helper.UserHelper
 
 class MyContentProvider : ContentProvider() {
@@ -17,31 +18,21 @@ class MyContentProvider : ContentProvider() {
         private const val USER_ID = 2
         private val sUriMatcher = UriMatcher(UriMatcher.NO_MATCH)
         private lateinit var userHelper: UserHelper
-        private const val AUTHORITY = "com.example.dicodinguserapp"
-        private const val TABLE_NAME = "favourite_user"
-        private val CONTENT_URI: Uri =
-            Uri.Builder().scheme(UserContract.UserColumns.SCHEME).authority(
-                AUTHORITY
-            ).appendPath(
-                TABLE_NAME
-            ).build()
 
         init {
-            sUriMatcher.addURI(AUTHORITY, TABLE_NAME, USER)
             sUriMatcher.addURI(AUTHORITY, "$TABLE_NAME/#", USER_ID)
+            sUriMatcher.addURI(AUTHORITY, TABLE_NAME, USER)
         }
     }
 
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
-        Log.d("delete-content-uri", uri.lastPathSegment.toString())
         userHelper.open()
 
         val deleted: Int = when (USER_ID) {
             sUriMatcher.match(uri) -> userHelper.deleteById(uri.lastPathSegment.toString())
             else -> 0
         }
-        Log.d("deleted-value", deleted.toString())
         context?.contentResolver?.notifyChange(CONTENT_URI, null)
         return deleted
     }
@@ -64,7 +55,6 @@ class MyContentProvider : ContentProvider() {
     override fun onCreate(): Boolean {
         userHelper = UserHelper.getInstance(context as Context)
         userHelper.open()
-
         return true
     }
 
@@ -72,16 +62,14 @@ class MyContentProvider : ContentProvider() {
         uri: Uri, projection: Array<String>?, selection: String?,
         selectionArgs: Array<String>?, sortOrder: String?
     ): Cursor? {
-        userHelper.open()
 
-        Log.d("uri.lastPathSegment", uri.lastPathSegment.toString())
-        val cursor: Cursor? = when (sUriMatcher.match(uri)) {
+        userHelper.open()
+        val a = sUriMatcher.match(uri)
+        val cursor: Cursor? = when (a) {
             USER -> userHelper.queryAll()
             USER_ID -> userHelper.queryById(uri.lastPathSegment.toString())
             else -> null
         }
-        Log.d("cursor-contenturi", cursor.toString())
-
         return cursor
     }
 
@@ -96,5 +84,6 @@ class MyContentProvider : ContentProvider() {
         context?.contentResolver?.notifyChange(CONTENT_URI, null)
         return updated
     }
+
 
 }

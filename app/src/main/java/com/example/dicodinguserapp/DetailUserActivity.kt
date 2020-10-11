@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.dicodinguserapp.db.UserContract
+import com.example.dicodinguserapp.db.UserContract.UserColumns.Companion.CONTENT_URI
 import com.example.dicodinguserapp.helper.MappingHelper
 import com.example.dicodinguserapp.helper.UserHelper
 import kotlinx.android.synthetic.main.activity_detail_user.*
@@ -21,14 +22,6 @@ class DetailUserActivity : AppCompatActivity() {
 
     companion object {
         const val DETAIL_USER = "detail_user"
-
-        const val AUTHORITY = "com.example.dicodinguserapp"
-        const val SCHEME = "content"
-
-        val CONTENT_URI: Uri = Uri.Builder().scheme(SCHEME).authority(AUTHORITY).appendPath(
-            UserContract.UserColumns.TABLE_NAME
-        ).build()
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,22 +32,8 @@ class DetailUserActivity : AppCompatActivity() {
         userHelper.open()
         val user = intent.getParcelableExtra<User>(DETAIL_USER) as User
 
-//        var newUser = User()
-//        uriWithId = Uri.parse(CONTENT_URI.toString() + "/" + user.username)
-//        Log.d("contenturi", CONTENT_URI.toString())
-//        Log.d("uriwithId", uriWithId.toString())
-//        val cursor = contentResolver.query(uriWithId, null, null, null, null)
-//        Log.d("cursor", cursor.toString())
-//
-//        if (cursor != null) {
-//            newUser = MappingHelper.mapCursorToObject(cursor)
-//            cursor.close()
-//        }
         checkFavouriteUser(user)
 
-//        statusFavourite = newUser.username != null
-//        setStatusFavourite(statusFavourite)
-//        Log.d("status=favour", statusFavourite.toString())
         statusFavourite = favouriteList.indexOf(user) >= 0
         Log.d("status",statusFavourite.toString())
         setStatusFavourite(statusFavourite)
@@ -75,7 +54,6 @@ class DetailUserActivity : AppCompatActivity() {
         fab_favourite.setOnClickListener {
             if (statusFavourite) {
                 userHelper.deleteById(user.username.toString())
-//                contentResolver.delete(uriWithId, null, null)
             } else {
                 val values = ContentValues()
                 values.put(UserContract.UserColumns.USERNAME, user.username)
@@ -86,7 +64,6 @@ class DetailUserActivity : AppCompatActivity() {
                 values.put(UserContract.UserColumns.REPOSITORY, user.repository)
                 values.put(UserContract.UserColumns.FOLLOWER, user.follower)
                 values.put(UserContract.UserColumns.FOLLOWING, user.following)
-//                userHelper.insert(values)
                 contentResolver.insert(CONTENT_URI, values)
             }
             statusFavourite = !statusFavourite
@@ -103,15 +80,9 @@ class DetailUserActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        userHelper.close()
-    }
-
-    private fun checkFavouriteUser(user: User){
-        favouriteList = MappingHelper.mapCursorToArrayList(userHelper.queryById(user.username.toString()))
-        Log.d("checkfavourite", favouriteList.toString())
-
+    private fun checkFavouriteUser(user: User) {
+        favouriteList =
+            MappingHelper.mapCursorToArrayList(userHelper.queryById(user.username.toString()))
     }
 
 }

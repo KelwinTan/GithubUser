@@ -4,17 +4,13 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dicodinguserapp.db.DatabaseHelper
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import cz.msebera.android.httpclient.Header
@@ -142,6 +138,7 @@ class MainActivity : AppCompatActivity() {
         client.addHeader("Content-Type", "application/json")
 
         val url = " https://api.github.com/users/$query"
+
 
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(

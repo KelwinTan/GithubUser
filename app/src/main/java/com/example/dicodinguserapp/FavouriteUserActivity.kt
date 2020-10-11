@@ -1,14 +1,12 @@
 package com.example.dicodinguserapp
 
 import android.database.ContentObserver
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dicodinguserapp.db.UserContract
+import com.example.dicodinguserapp.db.UserContract.UserColumns.Companion.CONTENT_URI
 import com.example.dicodinguserapp.helper.MappingHelper
 import com.example.dicodinguserapp.helper.UserHelper
 import kotlinx.android.synthetic.main.activity_favourite_user.*
@@ -24,13 +22,6 @@ class FavouriteUserActivity : AppCompatActivity() {
 
     companion object {
         private const val EXTRA_STATE = "EXTRA_STATE"
-        const val AUTHORITY = "com.example.dicodinguserapp"
-        const val SCHEME = "content"
-
-        val CONTENT_URI: Uri = Uri.Builder().scheme(SCHEME).authority(AUTHORITY).appendPath(
-            UserContract.UserColumns.TABLE_NAME
-        ).build()
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,9 +33,6 @@ class FavouriteUserActivity : AppCompatActivity() {
         adapter = FavouriteUserAdapter(this)
         rv_favourite_users.adapter = adapter
 
-//        userHelper = UserHelper.getInstance(applicationContext)
-//        userHelper.open()
-
         val handlerThread = HandlerThread("DataObserver")
         handlerThread.start()
         val handler = Handler(handlerThread.looper)
@@ -54,8 +42,6 @@ class FavouriteUserActivity : AppCompatActivity() {
                 loadFavouriteUsersAsync()
             }
         }
-
-        Log.d("favourite-content", CONTENT_URI.toString())
 
         contentResolver.registerContentObserver(CONTENT_URI, true, myObserver)
 
@@ -82,7 +68,6 @@ class FavouriteUserActivity : AppCompatActivity() {
             } else {
                 adapter.listFavouriteUsers = ArrayList()
             }
-            Log.d("load", adapter.listFavouriteUsers.toString())
         }
     }
 
@@ -90,10 +75,5 @@ class FavouriteUserActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
         outState.putParcelableArrayList(EXTRA_STATE, adapter.listFavouriteUsers)
     }
-
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        userHelper.close()
-//    }
 
 }

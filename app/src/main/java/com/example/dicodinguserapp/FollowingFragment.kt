@@ -2,16 +2,16 @@ package com.example.dicodinguserapp
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import cz.msebera.android.httpclient.Header
-import kotlinx.android.synthetic.main.fragment_follower.view.*
+import kotlinx.android.synthetic.main.fragment_following.*
 import kotlinx.android.synthetic.main.fragment_following.view.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -31,6 +31,13 @@ class FollowingFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         listFollowingAdapter = ListUserAdapter(followingList)
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        progressBar.visibility = View.VISIBLE
+
     }
 
     override fun onCreateView(
@@ -104,6 +111,8 @@ class FollowingFragment : Fragment() {
                         })
                         myFollowingRecyclerView.rv_following.adapter = listFollowingAdapter
                         listFollowingAdapter.notifyDataSetChanged()
+                        progressBar.visibility = View.INVISIBLE
+
                     }
                 } catch (e: Exception) {
                     Toast.makeText(activity, e.message, Toast.LENGTH_SHORT).show()

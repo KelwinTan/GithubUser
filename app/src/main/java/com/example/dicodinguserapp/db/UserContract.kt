@@ -5,10 +5,7 @@ import android.provider.BaseColumns
 
 internal class UserContract {
 
-
-
     internal class UserColumns : BaseColumns {
-
 
         companion object {
             const val TABLE_NAME = "favourite_user"

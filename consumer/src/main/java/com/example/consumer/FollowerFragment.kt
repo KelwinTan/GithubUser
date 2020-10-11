@@ -12,6 +12,7 @@ import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import cz.msebera.android.httpclient.Header
 import kotlinx.android.synthetic.main.fragment_follower.view.*
+import kotlinx.android.synthetic.main.fragment_following.*
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -60,6 +61,11 @@ class FollowerFragment : Fragment() {
         return myFollowerRecyclerView
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        progressBar.visibility = View.VISIBLE
+
+    }
 
     private fun getUser(query: String) {
         val client = AsyncHttpClient()
@@ -104,6 +110,8 @@ class FollowerFragment : Fragment() {
                         })
                         myFollowerRecyclerView.rv_followers.adapter = listFollowersAdapter
                         listFollowersAdapter.notifyDataSetChanged()
+                        progressBar.visibility = View.INVISIBLE
+
                     }
                 } catch (e: Exception) {
                     Toast.makeText(activity, e.message, Toast.LENGTH_SHORT).show()
